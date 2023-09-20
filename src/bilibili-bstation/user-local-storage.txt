@@ -1,0 +1,1 @@
+bstar_player_settings={"volume":0};

@@ -1,0 +1,25 @@
+{
+  "name": "crawler-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
+    "samehadaku": "node ./src/samehadaku/index.js",
+    "bilibili-bstation": "node ./src/bilibili-bstation/index.js"
+  },
+  "keywords": [],
+  "author": "Tirtha Ahmad Nazuha",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "1.5.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.22.2",
+    "jsdom": "22.1.0",
+    "mongodb": "^6.0.0",
+    "node-fetch": "3.3.2",
+    "puppeteer": "21.1.1"
+  }
+}
