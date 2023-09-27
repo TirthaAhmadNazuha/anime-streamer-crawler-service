@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js",
-    "samehadaku": "node ./src/samehadaku/index.js",
-    "bilibili-bstation": "node ./src/bilibili-bstation/index.js"
+    "bilibili-bstation": "node ./src/bilibili-bstation/main/index.js"
   },
   "keywords": [],
   "author": "Tirtha Ahmad Nazuha",
