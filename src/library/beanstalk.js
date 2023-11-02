@@ -8,9 +8,14 @@ const Beanstalk = class {
     this.url = `${this.origin}tubes/${tubename}`;
   }
 
-  async put() {
-    const job = (await axios.get(this.url)).data;
-    return job != 'null' ? job : null;
+  async put(size = 0) {
+    if (size > 0) {
+      const job = (await axios.get(this.url + `?size=${size}`)).data;
+      return job;
+    } else {
+      const job = (await axios.get(this.url)).data;
+      return job != 'null' ? job : null;
+    }
   }
 
   async body(...job) {

@@ -57,12 +57,34 @@ const getAndSaveResponseFromRequrement = async (requirement) => {
       audio: createWriteStream(`${root}${path}.mp3.tmp`),
       subtitles: createWriteStream(`${root}${path}.${subtitles.headers.get('Content-Type').split('/')[1] || '.acfs'}`)
     };
+
+    const contentLength = {
+      video: Number(video.headers.get('Content-Length')),
+      audio: Number(audio.headers.get('Content-Length')),
+      subtitles: Number(subtitles.headers.get('Content-Length')),
+    };
+    console.log('Downloading...');
+    const interval = setInterval(() => {
+      const progress = {
+        video: `${Math.round((writeStream.video.bytesWritten / contentLength.video) * 100)}%`,
+        audio: `${Math.round((writeStream.audio.bytesWritten / contentLength.audio) * 100)}%`,
+        subtitles: `${Math.round((writeStream.subtitles.bytesWritten / contentLength.subtitles) * 100)}%`,
+      };
+      Object.keys(progress).forEach((key) => {
+        if (Number(progress[key].replace('%', '')) >= 100) {
+          progress[key] = 'done';
+        }
+      });
+      console.clear();
+      console.log(`Progess[${path}] : ${JSON.stringify(progress, undefined, 2)}`);
+    }, 1000);
+
     await Promise.all([
       pipeline(video, writeStream.video),
       pipeline(audio, writeStream.audio),
       pipeline(subtitles, writeStream.subtitles),
     ]);
-
+    clearInterval(interval);
     await Promise.all([
       rename(`${root}${path}.mp4.tmp`, `${root}${path}.mp4`),
       rename(`${root}${path}.mp3.tmp`, `${root}${path}.mp3`),

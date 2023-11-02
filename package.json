@@ -5,9 +5,8 @@
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
-    "start": "node ./src/index.js",
-    "bilibili-bstation": "node ./src/bilibili-bstation/main/index.js"
+    "dev": "nodemon ./src/bilibili-bstation/main/index.js",
+    "start": "node ./src/bilibili-bstation/main/index.js"
   },
   "keywords": [],
   "author": "Tirtha Ahmad Nazuha",

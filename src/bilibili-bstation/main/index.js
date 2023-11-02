@@ -2,8 +2,8 @@ import { config } from 'dotenv';
 config();
 import SourceWorker from './SourceWorker.js';
 import getAndSaveResponseFromRequrement from './DownloadWorker.js';
-import BeanstalkConsumer from '../library/beanstalkConsumer.js';
-import BeanstalkConsumerWithBrowser from '../library/beanstalkConsumerWithBrowser.js';
+import BeanstalkConsumer from '../../library/beanstalkConsumer.js';
+import BeanstalkConsumerWithBrowser from '../../library/beanstalkConsumerWithBrowser.js';
 
 const Settings = {
   donwloadWorkerTubeName: 'bilibili-bstation-request-object',
@@ -11,7 +11,7 @@ const Settings = {
 };
 
 async function main() {
-  BeanstalkConsumerWithBrowser(Settings.sourceWorkerTubeName, SourceWorker, [Settings.donwloadWorkerTubeName]);
+  BeanstalkConsumerWithBrowser(Settings.sourceWorkerTubeName, SourceWorker, [Settings.donwloadWorkerTubeName, { episodes: ['E3', 'E4'] }]);
   BeanstalkConsumer(Settings.donwloadWorkerTubeName, getAndSaveResponseFromRequrement);
 }
 main().then(() => {
